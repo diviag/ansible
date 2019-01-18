@@ -1,0 +1,12 @@
+---
+  - hosts: localhost
+    ignore_errors: yes
+    tasks:
+      - name: install httpd software  
+        yum: name=httpd state=present
+        register: a  
+      - debug: msg="software install sucessfully"
+        when: a.failed == false
+      - debug: msg="software not installed"
+        when: a.failed == true
+  

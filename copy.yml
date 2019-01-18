@@ -1,0 +1,10 @@
+---
+ - hosts: localhost
+   tasks:
+    - name: copy file
+      copy: src=/root/dd dest=/etc
+      register: a
+    - debug: msg="file/folder copy successfully"
+      when: a.failed == false
+    - debug: msg="file/folder not copy successfully"
+      when: a.failed == true

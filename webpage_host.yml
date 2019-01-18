@@ -1,0 +1,22 @@
+---
+ - hosts: localhost
+   ignore_errors: yes
+   tasks:
+    - yum: name=httpd state=present
+      register: a      
+    - debug: msg="software not install"
+      when: a.failed == true
+    - debug: msg="software install"
+      when: a.failed == false
+    - copy: src=/root/index.html dest=/var/www/html             
+    - debug: msg="file not  copy"
+      when: a.failed == true             
+    - debug: msg="file copy"
+      when: a.failed == false
+    - service: name=httpd state=started enabled=yes         
+    - debug: msg="service not started"
+      when: a.failed == true             
+    - debug: msg="service started"
+      when: a.failed == false
+    - firewalld: service=https permanent=yes state=enabled
+             
