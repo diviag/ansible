@@ -1,0 +1,25 @@
+---
+ - hosts: all
+   tasks:
+    - lvg:
+        vg: divi 
+        pvs: /dev/sda5
+    - lvol: 
+        vg: divi 
+        lv: div 
+        size: 500
+    - filesystem: 
+        fstype: xfs 
+        dev:  /dev/divi//div
+    - shell: mkdir /mnt/dd02
+    - mount:
+        path: /mnt/dd02 
+        src: /dev/divi/div
+        fstype: xfs
+        state: present
+    #- shell: echo /dev/divi/div /mnt/dd0211  xfs defaults 0 0 >> /etc/fstab
+    - shell: mount -a
+
+
+ 
+
