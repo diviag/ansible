@@ -1,0 +1,9 @@
+---
+ - hosts: localhost
+   tasks: 
+    - archive: path=/var/log   dest=/var/www/html/group1.tar.gz format=gz
+      tags: 
+       - nogroup1
+    - archive: path=/var/log   dest=/var/www/html/group1.tar.gz format=gz
+      tags: 
+       - nogroup1

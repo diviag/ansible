@@ -2,10 +2,14 @@
  - hosts: localhost
    tasks:
     - file: path=/var/www/html/protected/ state=directory
+      tags:
+       - making
     - get_url: url=http://192.168.10.254/automation/secure.html dest=/var/www/html/protected/index.html 
 
     - get_url: url=http://192.168.10.254/automation/htaccess dest=/var/www/html/protected/.htaccess
     - get_url: url=http://192.168.10.254/automation/htpasswd  dest=/var/www/html/protected/.htpasswd
     - replace: path=/etc/httpd/conf/httpd.conf  regexp="AllowOverride None" replace="AllowOverride AuthConfig"
     - service: name=httpd state=restarted enabled=yes
+      tags: 
+       - always
     

@@ -1,0 +1,14 @@
+---
+ - hosts: all
+   vars_files: var.yml
+   tasks:
+    - yum: name={{ item }} state=present
+      with_items:
+       -  "{{ x }}"
+       -  "{{ y }}"
+       -  "{{ z }}"
+    - service: name={{ item }} state=started
+      with_items:
+       -  "{{ x }}"
+       -  "{{ y }}"
+       -  "{{ z }}"
